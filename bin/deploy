@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+CLUSTER_IP=$(minikube ip)
+
+tmp=$(sed "s~<cluster_ip>~$CLUSTER_IP~g" function.yaml); printf "%s" "$tmp" > function.yaml
+
+nuctl deploy extract-media-info -p . --registry $CLUSTER_IP:5000  --verbose
