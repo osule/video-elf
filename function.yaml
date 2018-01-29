@@ -1,0 +1,9 @@
+apiVersion: "nuclio.io/v1"
+kind: "Function"
+spec:
+  runtime: "python"
+  handler: "video_elf:extract_media_urls"
+
+  build:
+    commands:
+    - "pip install -r requirements.txt"
