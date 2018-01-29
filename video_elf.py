@@ -2,10 +2,10 @@ import json
 
 from youtube_dl import YoutubeDL
 
+
 youtube_dl = YoutubeDL()
 
-
-def extract_media_urls(context, event):
+def extract_media_info(context, event):
     context.logger.info('Extracting media information from Youtube url')
 
     body = json.loads(event.body)
