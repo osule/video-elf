@@ -1,9 +1,29 @@
 apiVersion: "nuclio.io/v1"
 kind: "Function"
+metadata:
+  name: "extract-media-info"
+  namespace: "nuclio"
 spec:
+  description: "Extracts media info from video URL."
   runtime: "python"
-  handler: "video_elf:extract_media_urls"
+  image: "nuclio/extract_media_info"
+  handler: "video_elf:extract_media_info"
+  runRegistry: "localhost:5000"
 
   build:
+    imageVersion: "0.0.1"
+    imageName: "nuclio/extract_media_info"
+    nuclioSourceDir: "."
     commands:
-    - "pip install -r requirements.txt"
+    - "pip install youtube_dl"
+  
+  triggers:
+    http:
+      maxWorkers: 4
+      kind: "http"
+      attributes:
+        ingresses:
+          http:
+            host: "<cluster_ip>"
+            paths:
+            - "/extract-media-info"
