@@ -1,10 +1,10 @@
 import json
 from mock import Mock
 
-from video_elf import extract_media_urls
+from video_elf import extract_media_info
 
 
-def test_extract_media_url():
+def test_extract_media_info():
     event = Mock(
         body=json.dumps({
             'url': 'https://youtu.be/a8MnOv0uxkY'
